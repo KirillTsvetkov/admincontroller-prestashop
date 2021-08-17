@@ -1,5 +1,6 @@
 <?php
 
+require_once _PS_MODULE_DIR_ . '/kirilladmin/classes/Sample.php';
 
 class KirillAdmin extends Module
 {
@@ -23,7 +24,7 @@ class KirillAdmin extends Module
      */
     public function install()
     {
-        return parent::install() && $this->_installTab();
+        return parent::install() && $this->_installTab() &&  $this->_installSql() ;
     }
 
     /**
@@ -32,10 +33,21 @@ class KirillAdmin extends Module
      */
     public function uninstall()
     {
-        return parent::uninstall() && $this->_uninstallTab();
+        return parent::uninstall() && $this->_uninstallTab() &&  $this->_uninstallSql();
     }
 
-   
+    protected function _installSql()
+    {
+        $sqlCreate = "CREATE TABLE `" . _DB_PREFIX_ . Sample::$definition['table'] . "` (
+                `id_note` int(11) unsigned NOT NULL AUTO_INCREMENT,
+                `title` varchar(255) DEFAULT NULL,
+                `text` TEXT DEFAULT NULL,
+                PRIMARY KEY (`id_note`)
+                ) ";
+
+
+        return Db::getInstance()->execute($sqlCreate);
+    }
 
     protected function _installTab()
     {
@@ -58,10 +70,7 @@ class KirillAdmin extends Module
         return true;
     }
 
-    /**
-     * Désinstallation du controller admin
-     * @return boolean
-     */
+ 
     protected function _uninstallTab()
     {
         $idTab = (int)Tab::getIdFromClassName('AdminKirill');
@@ -75,6 +84,12 @@ class KirillAdmin extends Module
             }
         }
         return true;
+    }
+
+    protected function _uninstallSql()
+    {
+        $sql = "DROP TABLE "._DB_PREFIX_.Sample::$definition['table'];
+        return Db::getInstance()->execute($sql);
     }
 
 }
