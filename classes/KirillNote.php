@@ -1,6 +1,6 @@
 <?php
 
-class Sample extends ObjectModel
+class KirillNote extends ObjectModel
 {
 
     public $id;

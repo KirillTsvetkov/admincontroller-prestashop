@@ -1,6 +1,6 @@
 <?php
 
-require_once _PS_MODULE_DIR_ . '/kirilladmin/classes/Sample.php';
+require_once _PS_MODULE_DIR_ . '/kirilladmin/classes/KirillNote.php';
 
 class AdminKirillController extends ModuleAdminController
 {
@@ -11,9 +11,9 @@ class AdminKirillController extends ModuleAdminController
      */
     public function __construct()
     {
-        $this->table = Sample::$definition['table']; //Table de l'objet
-        $this->identifier = Sample::$definition['primary']; //Clé primaire de l'objet
-        $this->className = Sample::class; 
+        $this->table = KirillNote::$definition['table']; //Table de l'objet
+        $this->identifier = KirillNote::$definition['primary']; //Clé primaire de l'objet
+        $this->className = KirillNote::class; 
         $this->bootstrap = true;
         parent::__construct();
         $this->fields_list = [

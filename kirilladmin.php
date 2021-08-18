@@ -1,6 +1,6 @@
 <?php
 
-require_once _PS_MODULE_DIR_ . '/kirilladmin/classes/Sample.php';
+require_once _PS_MODULE_DIR_ . '/kirilladmin/classes/KirillNote.php';
 
 class KirillAdmin extends Module
 {
@@ -14,8 +14,8 @@ class KirillAdmin extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('Prestashop sample Module');
-        $this->description = $this->l('Prestashop sample Module with front controller');
+        $this->displayName = $this->l('Prestashop KirillNote Module');
+        $this->description = $this->l('Prestashop KirillNote Module with front controller');
     }
 
     /**
@@ -38,7 +38,7 @@ class KirillAdmin extends Module
 
     protected function _installSql()
     {
-        $sqlCreate = "CREATE TABLE `" . _DB_PREFIX_ . Sample::$definition['table'] . "` (
+        $sqlCreate = "CREATE TABLE `" . _DB_PREFIX_ . KirillNote::$definition['table'] . "` (
                 `id_note` int(11) unsigned NOT NULL AUTO_INCREMENT,
                 `title` varchar(255) DEFAULT NULL,
                 `text` TEXT DEFAULT NULL,
@@ -88,7 +88,7 @@ class KirillAdmin extends Module
 
     protected function _uninstallSql()
     {
-        $sql = "DROP TABLE "._DB_PREFIX_.Sample::$definition['table'];
+        $sql = "DROP TABLE "._DB_PREFIX_.KirillNote::$definition['table'];
         return Db::getInstance()->execute($sql);
     }
 
